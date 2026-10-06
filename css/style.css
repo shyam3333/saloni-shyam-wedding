@@ -490,10 +490,10 @@ button { font-family: inherit; }
 .film-track {
   display: flex;
   width: max-content;
-  animation: filmScroll 38s linear infinite;
+  /* the slide is driven by JS (initFilmReel) so it keeps running when the
+     phone disables CSS animations (reduce motion / low power) */
   will-change: transform;
 }
-@keyframes filmScroll { to { transform: translateX(-50%); } }
 .film-cell {
   position: relative;
   flex: 0 0 240px;
@@ -1076,6 +1076,9 @@ button { font-family: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .petal, .seal-btn, .seal-ring, .scroll-arrow, .scroll-cue, .film-track { animation: none !important; }
+  .petal, .seal-btn, .seal-ring, .scroll-arrow, .scroll-cue { animation: none !important; }
+  /* the film reel is deliberately NOT stopped here: it is the content of its
+     section, and a phone with "remove animations" / battery saver on would
+     otherwise see a frozen strip. It is a slow, gentle drift. */
   .section { transition: none; }
 }

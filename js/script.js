@@ -249,6 +249,32 @@
     const reps = Math.max(1, Math.ceil(8 / photos.length));
     const half = Array.from({ length: reps }, (_, i) => cells(i > 0)).join("");
     track.innerHTML = half + half.replace(/alt="[^"]*"/g, 'alt=""');
+
+    // Drive the slide from JavaScript instead of a CSS animation. Phones in
+    // "reduce motion" / battery-saver / low-power modes can pause or disable
+    // CSS animations, but a requestAnimationFrame loop keeps running (low
+    // power mode only lowers its frame rate), so the reel always moves.
+    // Speed is in px/second and uses real elapsed time, so it looks the same
+    // at 60fps or 30fps. It pauses while off-screen to save battery.
+    const SPEED = 38; // px per second
+    let offset = 0, last = 0, visible = true, rafId = 0;
+    const reel = track.closest(".film-reel") || track;
+    function frame(now) {
+      rafId = requestAnimationFrame(frame);
+      if (!last) last = now;
+      const dt = Math.min(now - last, 100) / 1000; // ignore long gaps (tab was hidden)
+      last = now;
+      if (!visible) return;
+      const loopWidth = track.scrollWidth / 2;
+      if (loopWidth <= 0) return;
+      offset = (offset + SPEED * dt) % loopWidth;
+      track.style.transform = `translate3d(${-offset}px,0,0)`;
+    }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { root: null, rootMargin: "100px" }).observe(reel);
+    }
+    document.addEventListener("visibilitychange", () => { last = 0; });
+    rafId = requestAnimationFrame(frame);
   }
   initFilmReel();
 
