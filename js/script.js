@@ -236,7 +236,13 @@
 
     const cells = (hidden) =>
       photos
-        .map((p) => `<div class="film-cell"${hidden ? ' aria-hidden="true"' : ""}><img src="${p.img}" alt="${hidden ? "" : "Saloni and Shyam"}" loading="lazy" decoding="async"></div>`)
+        .map((p) => {
+          const alt = hidden ? "" : "Saloni and Shyam";
+          const inner = p.portrait
+            ? `<div class="film-frame"><img class="film-bg" src="${p.img}" alt="" loading="lazy" decoding="async"><img class="film-fg" src="${p.img}" alt="${alt}" loading="lazy" decoding="async"></div>`
+            : `<img src="${p.img}" alt="${alt}" loading="lazy" decoding="async">`;
+          return `<div class="film-cell"${hidden ? ' aria-hidden="true"' : ""}>${inner}</div>`;
+        })
         .join("");
     // twice, so sliding the track by exactly half its width loops seamlessly;
     // repeat the set if it's short so one half is always wider than the screen

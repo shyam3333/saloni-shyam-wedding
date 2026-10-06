@@ -55,17 +55,18 @@ window.WEDDING_CONFIG = {
 
   // ---- Film reel ("Our Beautiful Moments") --------------------------------
   // The photos scroll past on a film strip, in this order. galleryCaption is
-  // the one line shown under the strip.
+  // the one line shown under the strip. portrait:true shows the whole upright
+  // photo (face and body) instead of cropping it into the landscape frame.
   galleryCaption: "Forever Begins Here",
   gallery: [
     { img: "assets/images/reel/reel-1.jpg" },
     { img: "assets/images/reel/reel-2.jpg" },
-    { img: "assets/images/reel/reel-3.jpg" },
+    { img: "assets/images/reel/reel-3.jpg", portrait: true },
     { img: "assets/images/reel/reel-4.jpg" },
     { img: "assets/images/reel/reel-5.jpg" },
     { img: "assets/images/reel/reel-6.jpg" },
     { img: "assets/images/reel/reel-7.jpg" },
-    { img: "assets/images/reel/reel-8.jpg" }
+    { img: "assets/images/reel/reel-8.jpg", portrait: true }
   ],
 
   // ---- Venue -------------------------------------------------------------
