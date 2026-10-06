@@ -227,53 +227,24 @@
   /* ----------------------------------------------------------------
      Gallery
      ---------------------------------------------------------------- */
-  function initGalleryCarousel() {
-    const items = CONFIG.gallery || [];
-    const viewport = document.getElementById("galleryViewport");
-    const track = document.getElementById("galleryTrack");
+  function initFilmReel() {
+    const photos = CONFIG.gallery || [];
+    const track = document.getElementById("filmTrack");
     const captionEl = document.getElementById("galleryCaption");
-    const dotsEl = document.getElementById("galleryDots");
-    if (!viewport || !track || !items.length) return;
+    if (captionEl && CONFIG.galleryCaption) captionEl.textContent = CONFIG.galleryCaption;
+    if (!track || !photos.length) return;
 
-    track.innerHTML = items
-      .map(
-        (item) => `<div class="gallery-slide"><img src="${item.img}" alt="${item.caption}" loading="lazy"></div>`
-      )
-      .join("");
-
-    dotsEl.innerHTML = items
-      .map((_, i) => `<button type="button" class="gallery-dot" aria-label="Go to photo ${i + 1}"></button>`)
-      .join("");
-    const dots = [...dotsEl.querySelectorAll(".gallery-dot")];
-
-    let index = 0;
-    function render() {
-      track.style.transform = `translateX(-${index * 100}%)`;
-      dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
-      captionEl.textContent = items[index].caption;
-    }
-    function goTo(i) {
-      index = (i + items.length) % items.length;
-      render();
-    }
-
-    viewport.addEventListener("click", () => goTo(index + 1));
-    viewport.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        goTo(index + 1);
-      }
-    });
-    dots.forEach((d, i) =>
-      d.addEventListener("click", (e) => {
-        e.stopPropagation();
-        goTo(i);
-      })
-    );
-
-    render();
+    const cells = (hidden) =>
+      photos
+        .map((p) => `<div class="film-cell"${hidden ? ' aria-hidden="true"' : ""}><img src="${p.img}" alt="${hidden ? "" : "Saloni and Shyam"}" loading="lazy" decoding="async"></div>`)
+        .join("");
+    // twice, so sliding the track by exactly half its width loops seamlessly;
+    // repeat the set if it's short so one half is always wider than the screen
+    const reps = Math.max(1, Math.ceil(8 / photos.length));
+    const half = Array.from({ length: reps }, (_, i) => cells(i > 0)).join("");
+    track.innerHTML = half + half.replace(/alt="[^"]*"/g, 'alt=""');
   }
-  initGalleryCarousel();
+  initFilmReel();
 
   /* ----------------------------------------------------------------
      Embedded Google Maps iframes (venue + Manglik) capture touch-drag
@@ -553,6 +524,7 @@
           <p class="ceremony-meta">${c.date}</p>
           ${scheduleOrTime}
           ${c.venue ? `<p class="ceremony-venue-line">Venue &mdash; ${c.venue}</p>` : ""}
+          ${c.themeLabel && c.themeLabelHeading ? `<span class="ceremony-theme-heading">${c.themeLabelHeading}</span>` : ""}
           ${c.themeLabel ? `<span class="ceremony-theme-badge">${c.themeLabel}</span>` : ""}
         `;
 

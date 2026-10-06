@@ -53,13 +53,19 @@ window.WEDDING_CONFIG = {
   weddingDateShort: "26th November, 2026",
   tagline: "The start of a beautiful journey, shared with the ones we love most.",
 
-  // ---- Gallery ("Our Beautiful Moments") --------------------------------
-  // Add up to as many as you like. Set img to a path once you have photos.
+  // ---- Film reel ("Our Beautiful Moments") --------------------------------
+  // The photos scroll past on a film strip, in this order. galleryCaption is
+  // the one line shown under the strip.
+  galleryCaption: "Forever Begins Here",
   gallery: [
-    { caption: "Where It All Begin", img: "assets/images/gallery/begin.jpg" },
-    { caption: "The Proposal", img: "assets/images/gallery/proposal.jpg" },
-    { caption: "Our First Celebration Together", img: "assets/images/gallery/celebration.jpg" },
-    { caption: "Forever Begins Here", img: "assets/images/gallery/forever.jpg" }
+    { img: "assets/images/reel/reel-1.jpg" },
+    { img: "assets/images/reel/reel-2.jpg" },
+    { img: "assets/images/reel/reel-3.jpg" },
+    { img: "assets/images/reel/reel-4.jpg" },
+    { img: "assets/images/reel/reel-5.jpg" },
+    { img: "assets/images/reel/reel-6.jpg" },
+    { img: "assets/images/reel/reel-7.jpg" },
+    { img: "assets/images/reel/reel-8.jpg" }
   ],
 
   // ---- Venue -------------------------------------------------------------
@@ -104,7 +110,7 @@ window.WEDDING_CONFIG = {
       bgImage: "assets/images/ceremonies/manglik-bg.jpg",
       darkText: true,
       textTop: "24%",
-      venue: "Home",
+      venue: "Naya Mill Compound (Near Bank of Baroda), Mursan Gate, Hathras, U.P.- 204101",
       venueMap: {
         mapQuery: "27.5948633,78.0428031",
         directionsUrl: "https://www.google.com/maps?q=27.5948633,78.0428031&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,100821555,47071704,100809208,94218641,94282134,100835699,94286869,100820247,100822504&g_ep=CAISEjI2LjM4LjEuOTgwODE1NDQ1MBgAINeCAypxLDk0Mjk3Njk5LDk0MjMxMTg4LDk0MjgwNTY4LDEwMDgyMTU1NSw0NzA3MTcwNCwxMDA4MDkyMDgsOTQyMTg2NDEsOTQyODIxMzQsMTAwODM1Njk5LDk0Mjg2ODY5LDEwMDgyMDI0NywxMDA4MjI1MDRCAklO&skid=fcf9aff7-a5ca-4a68-a12b-47b7e1e8dc46&g_st=iw"
@@ -135,6 +141,7 @@ window.WEDDING_CONFIG = {
       subtitle: "Colorful Fiesta",
       date: "25th November 2026",
       time: "1:30 PM onwards",
+      themeLabelHeading: "Dress Code",
       themeLabel: "Shades Of Lavender",
       venue: "Madhogarh",
       bgImage: "assets/images/ceremonies/haldi-carnival-bg.jpg",
@@ -148,6 +155,7 @@ window.WEDDING_CONFIG = {
       subtitle: "Sip, Sparkle & Say ‘Yes’",
       date: "25th November 2026",
       time: "5:30 PM onwards",
+      themeLabelHeading: "Dress Code",
       themeLabel: "Glam and Glitter",
       venue: "Madhogarh",
       bgImage: "assets/images/ceremonies/sangeet-bg.jpg",
